@@ -2,6 +2,9 @@
 
 //need an array of letters
 var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+//array of letters we've guessed
+var guessedLetters = [];
 //letter to guess based on a random letter assignment
 //begins as null because we don't have an initial value
 var letterToGuess = null;
