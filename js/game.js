@@ -22,20 +22,29 @@ var losses = 0;
 //one for guesses so far
 
 var updateGuessesLeft = function (){
-
+    //get the htmll lement "guesses-left" and set it to the guessesLeft variable
+    document.querySelector("#guesses-left").innerHTML = guessesLeft;
 };
 
 var updateLetterToGuess = function(){
+    //the app needs to figure out the letter to guess
+    letterToGuess = letters[Math.floor(Math.random() * letters.length)];
 
 };
 
 var updateGuessesSoFar = function(){
+    //list all the guesses we've already made
+    document.querySelector("#your-guesses").innerHTML = guessedLetters.join(", ");
 
 };
 
 //reset function for when we start over
 var reset = function(){
-
+    guessesLeft = 9;
+    guessedLetters = [];
+    updateLetterToGuess();
+    updateGuessesLeft();
+    updateGuessesSoFar();
 };
 
 //stuff that happens when the page loads
@@ -45,8 +54,22 @@ updateGuessesSoFar();
 //all this stuff happens when there's a keyboard click
 document.onkeyup = function(event){
     guessesleft--;
+
+    //make the letter lowercase
+    var letter = String.fromCharCode(event.which).toLowerCase();
+
+    guessedLetters.push(letter);
+
+    updateGuessesLeft();
+    updateGuessesSoFar();
+
 //check for a match
 if (letter === letterToGuess){
+
+    //update wins
+    wins++;
+    document.querySelector("#wins").innerHTML = wins;
+    reset();
 
 }
 
@@ -54,6 +77,7 @@ if (letter === letterToGuess){
 if (guessesLeft === 0){
     //here we have a loss
     losses++;
+    document.querySelector("@losses").innerHTML = losses;
     reset();
 }
 };
